@@ -121,38 +121,38 @@ Decoradores y redirecciones manejan accesos no autorizados (403).
 
 ## 🚀 Cómo Ejecutar el Proyecto
 
-### Crear entorno virtual
+#### Crear entorno virtual
 ```bash
 python -m venv myenv
 ```
 
-### Activar entorno virtual (Windows)
+#### Activar entorno virtual (Windows)
 ```bash
 myenv\Scripts\activate
 ```
 
-### Activar entorno virtual (Linux/Mac)
+#### Activar entorno virtual (Linux/Mac)
 ```bash
 source env/bin/activate
 ```
 
-### Instalar dependencias
+#### Instalar dependencias
 ```bash
 pip install -r requirements.txt
 ```
 
-### Aplicar migraciones
+#### Aplicar migraciones
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-### Crear superusuario
+#### Crear superusuario
 ```bash
 python manage.py createsuperuser
 ```
 
-### Ejecutar servidor de desarrollo
+#### Ejecutar servidor de desarrollo
 ```bash
 python manage.py runserver
 ```
