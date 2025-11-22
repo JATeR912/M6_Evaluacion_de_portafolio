@@ -4,41 +4,69 @@
 {% block content %}
 <div class="hero mb-4">
     <div class="hero-overlay">
-        <h1 class="display-4 fw-bold">Explora Festivales en Japón</h1>
-        <p class="lead">Descubre y guarda tus eventos culturales favoritos con TravelPoint</p>
-        {% if user.is_authenticated %}
-            <a href="{% url 'lista_lugares' %}" class="btn btn-primary btn-lg">Ver Lugares</a>
-        {% else %}
-            <a href="{% url 'login' %}" class="btn btn-success btn-lg">Inicia Sesión</a>
-        {% endif %}
+        <h1 class="display-5 fw-bold text-center">Explora Festivales en Japón</h1>
+        <p class="lead text-center mb-4">
+            Descubre y guarda tus eventos culturales favoritos con TravelPoint
+        </p>
+
+        <div class="text-center">
+            {% if user.is_authenticated %}
+                <a href="{% url 'lista_lugares' %}" class="btn btn-primary btn-lg">
+                    Ver Lugares
+                </a>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-success btn-lg">
+                    Iniciar Sesión
+                </a>
+            {% endif %}
+        </div>
     </div>
 </div>
+<div class="container my-4">
 
-<div class="container">
-    <h1 class="mb-4">Lugares Turísticos</h1>
-    <div class="row">
+    <h2 class="mb-4 text-center fw-bold">Lugares Turísticos</h2>
+
+    <div class="row g-4">
         {% for lugar in lugares %}
-        <div class="col-md-4">
-            <div class="card mb-3">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
+            <div class="card h-100 shadow-sm">
+
                 {% if lugar.imagen %}
-                <img src="{{ lugar.imagen.url }}" class="card-img-top" alt="{{ lugar.nombre }}">
+                <img src="{{ lugar.imagen.url }}" class="card-img-top object-fit-cover"
+                     style="height: 180px;" alt="{{ lugar.nombre }}">
                 {% endif %}
-                <div class="card-body">
+
+                <div class="card-body d-flex flex-column">
                     <h5 class="card-title">{{ lugar.nombre }}</h5>
-                    <p class="card-text">{{ lugar.ciudad }}</p>
-                    {% if user.is_authenticated %}
-                    {% if user.is_staff %}
-                        <a href="{% url 'editar_lugar' lugar.pk %}" class="btn btn-warning">Editar</a>
-                        <a href="{% url 'eliminar_lugar' lugar.pk %}" class="btn btn-danger">Eliminar</a>
-                    {% endif %}
-                    <a href="{% url 'detalle_lugar' lugar.pk %}" class="btn btn-primary">Ver detalles</a>
-                {% else %}
-                    <a href="{% url 'login'%}" class="btn btn-primary"> Iniciar sesion para Ver detalles</a>
-                {% endif %}
+                    <p class="card-text text-muted">{{ lugar.ciudad }}</p>
+
+                    <div class="mt-auto"> <!-- empuja botones abajo -->
+                        {% if user.is_authenticated %}
+                            {% if user.is_staff %}
+                                <a href="{% url 'editar_lugar' lugar.pk %}" class="btn btn-warning btn-sm w-100 mb-2">
+                                    Editar
+                                </a>
+                                <a href="{% url 'eliminar_lugar' lugar.pk %}" class="btn btn-danger btn-sm w-100 mb-2">
+                                    Eliminar
+                                </a>
+                            {% endif %}
+
+                            <a href="{% url 'detalle_lugar' lugar.pk %}"
+                               class="btn btn-primary btn-sm w-100">
+                                Ver detalles
+                            </a>
+
+                        {% else %}
+                            <a href="{% url 'login' %}" class="btn btn-primary btn-sm w-100">
+                                Inicia sesión para ver detalles
+                            </a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
-    {% endfor %}
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
